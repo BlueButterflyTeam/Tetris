@@ -20,6 +20,7 @@ public:
 
 	Color getColor();
 	void setColor(Color color);
+	void setColor(TetrominoType type);
 	TetrominoType getType();
 	void setType(TetrominoType type);
 	TetrominoRotation getRotation();
@@ -33,12 +34,12 @@ private:
 	TetrominoRotation rotation;
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> matrix;
 
-	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getSquare(TetrominoRotation rotation);
+	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getO(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getI(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getL(TetrominoRotation rotation);
-	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getMirroredL(TetrominoRotation rotation);
-	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getN(TetrominoRotation rotation);
-	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getMirroredN(TetrominoRotation rotation);
+	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getJ(TetrominoRotation rotation);
+	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getZ(TetrominoRotation rotation);
+	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getS(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getT(TetrominoRotation rotation);
 };
 
