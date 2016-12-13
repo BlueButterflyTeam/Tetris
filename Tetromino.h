@@ -3,6 +3,7 @@
 #define _BOARD_
 
 #include "Color.h"
+#include "TetrominoType.h"
 
 class Tetromino
 {
@@ -11,6 +12,7 @@ public:
 	~Tetromino();
 private:
 	Color color;
+	TetrominoType type;
 };
 
 #endif

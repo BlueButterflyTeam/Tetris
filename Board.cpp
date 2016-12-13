@@ -20,18 +20,18 @@ bool Board::isBlockFree(int pX, int pY)
 
 void Board::shiftLinesDown(int beginLine)
 {
-	//Shift values of all lines from beginLine except the one at the top. Values from line n become values from line n + 1.
-	for (size_t line = beginLine; line < BOARD_HEIGHT - 1; line++)
+	//Shift values of all lines from beginLine except the one at the top. Values from line n become values from line n - 1.
+	for (size_t line = beginLine; line > 0; line--)
 	{
 		for (size_t column = 0; column < BOARD_WIDTH; column++)
 		{
-			board[line][column] = board[line + 1][column];
+			board[line][column] = board[line - 1][column];
 		}
 	}
 
 	//Clear the line at the top
 	for (size_t column = 0; column < BOARD_WIDTH; column++)
 	{
-		board[BOARD_HEIGHT - 1][column] = BLOCK_EMPTY;
+		board[0][column] = BLOCK_EMPTY;
 	}
 }
