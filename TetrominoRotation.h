@@ -1,2 +1,2 @@
 #pragma once
-enum TetrominoRotation {ROTATION_NONE, ROTATION_ONCE, ROTATION_TWICE, ROTATION_THRICE, NB_ROTATIONS};
+enum TetrominoRotation {NONE, ONCE, TWICE, THRICE, NB_ROTATIONS};
