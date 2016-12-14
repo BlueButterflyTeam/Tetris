@@ -49,6 +49,7 @@ void Tetromino::setColor(TetrominoType type)
 		color = MAGENTA;
 		break;
 	default:
+		color = BLACK;
 		break;
 	}
 
