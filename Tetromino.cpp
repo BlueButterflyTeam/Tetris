@@ -2,6 +2,7 @@
 
 Tetromino::Tetromino()
 {
+	randomize();
 }
 
 
@@ -80,6 +81,14 @@ void Tetromino::setMatrix(TetrominoType type, TetrominoRotation rotation)
 	}
 
 	this->matrix = matrix;
+}
+
+void Tetromino::randomize()
+{
+	this->type = getRandomTetrominoType();
+	this->rotation = NONE;
+	setColor(this->type);
+	setMatrix(this->type, this->rotation);
 }
 
 array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getO(TetrominoRotation rotation)

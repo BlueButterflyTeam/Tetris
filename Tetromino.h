@@ -5,7 +5,6 @@
 #include "Color.h"
 #include "TetrominoType.h"
 #include "TetrominoRotation.h"
-#include "Block.h"
 
 #include <array>
 
@@ -21,6 +20,7 @@ public:
 
 	void setColor(TetrominoType type);
 	void setMatrix(TetrominoType type, TetrominoRotation rotation);
+	void randomize();
 
 	Color color;
 	TetrominoType type;
