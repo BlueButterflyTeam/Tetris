@@ -1,10 +1,11 @@
 #pragma once
-#ifndef _BOARD_
-#define _BOARD_
+#ifndef _TETROMINO_
+#define _TETROMINO_
 
 #include "Color.h"
 #include "TetrominoType.h"
 #include "TetrominoRotation.h"
+#include "Block.h"
 
 #include <array>
 
@@ -18,22 +19,15 @@ public:
 	Tetromino();
 	~Tetromino();
 
-	Color getColor();
-	void setColor(Color color);
 	void setColor(TetrominoType type);
-	TetrominoType getType();
-	void setType(TetrominoType type);
-	TetrominoRotation getRotation();
-	void setRotation(TetrominoRotation rotation);
-	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getMatrix();
 	void setMatrix(TetrominoType type, TetrominoRotation rotation);
 
-private:
 	Color color;
 	TetrominoType type;
 	TetrominoRotation rotation;
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> matrix;
-
+	
+private:
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getO(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getI(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getL(TetrominoRotation rotation);

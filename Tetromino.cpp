@@ -1,7 +1,5 @@
 #include "Tetromino.h"
 
-
-
 Tetromino::Tetromino()
 {
 }
@@ -9,16 +7,6 @@ Tetromino::Tetromino()
 
 Tetromino::~Tetromino()
 {
-}
-
-Color Tetromino::getColor()
-{
-	return this->color;
-}
-
-void Tetromino::setColor(Color color)
-{
-	this->color = color;
 }
 
 void Tetromino::setColor(TetrominoType type)
@@ -54,31 +42,6 @@ void Tetromino::setColor(TetrominoType type)
 	}
 
 	this->color = color;
-}
-
-TetrominoType Tetromino::getType()
-{
-	return this->type;
-}
-
-void Tetromino::setType(TetrominoType type)
-{
-	this->type = type;
-}
-
-TetrominoRotation Tetromino::getRotation()
-{
-	return this->rotation;
-}
-
-void Tetromino::setRotation(TetrominoRotation rotation)
-{
-	this->rotation = rotation;
-}
-
-array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getMatrix()
-{
-	return this->matrix;
 }
 
 void Tetromino::setMatrix(TetrominoType type, TetrominoRotation rotation)
