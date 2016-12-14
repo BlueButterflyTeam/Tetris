@@ -26,6 +26,8 @@ public:
 	TetrominoType type;
 	TetrominoRotation rotation;
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> matrix;
+	void rotateLeft();
+	void rotateRight();
 	
 private:
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getO(TetrominoRotation rotation);

@@ -91,6 +91,20 @@ void Tetromino::randomize()
 	setMatrix(this->type, this->rotation);
 }
 
+void Tetromino::rotateLeft()
+{
+	//Add 90 degrees
+	this->rotation = static_cast<TetrominoRotation>(static_cast<int>(this->rotation) + 1 % NB_ROTATIONS);
+	setMatrix(this->type, this->rotation);
+}
+
+void Tetromino::rotateRight()
+{
+	// Substract 90 degress
+	this->rotation = static_cast<TetrominoRotation>(static_cast<int>(this->rotation) - 1 % NB_ROTATIONS);
+	setMatrix(this->type, this->rotation);
+}
+
 array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getO(TetrominoRotation rotation)
 {
 	return { { 

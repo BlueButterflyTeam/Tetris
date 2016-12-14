@@ -2,11 +2,7 @@
 
 Board::Board()
 {
-	//Fill board with empty blocks
-	for (size_t line = 0; line < BOARD_HEIGHT; line++)
-	{
-		board[line].fill(false);
-	}
+	clear();
 }
 
 Board::~Board()
@@ -28,7 +24,7 @@ void Board::shiftLinesDown(unsigned int beginLine)
 	board[0].fill(false);
 }
 
-void Board::storeTetromino(unsigned int pX, unsigned int pY, Tetromino tetromino)
+void Board::storeTetromino(int pX, int pY, Tetromino tetromino)
 {
 	// (0,0) is the upper-left corner of the tetromino. pX and pY are the coordinates of the tetromino's upper left corner before the collision.
 	for (size_t x = 0; x < PIECE_BLOCKS; x++)
@@ -44,7 +40,7 @@ void Board::storeTetromino(unsigned int pX, unsigned int pY, Tetromino tetromino
 	}
 }
 
-bool Board::isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetromino)
+bool Board::isPossibleMovement(int pX, int pY, Tetromino tetromino)
 {
 	// (0,0) is the upper-left corner of the tetromino. pX and pY are the coordinates of the tetromino's upper left corner at the collision.
 	for (size_t x = 0; x < PIECE_BLOCKS; x++)
@@ -53,16 +49,16 @@ bool Board::isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetro
 		{
 			if (tetromino.matrix[x][y])
 			{
+				if (pX + x < 0 || pX + x > BOARD_WIDTH || y < 0 || y > BOARD_HEIGHT)
+				{
+					//This block is off limits
+					return false;
+				}
+
 				//There is a block in the tetromino at this coordinates
 				if (board[pX + x][pY + y])
 				{
 					//This block is not free
-					return false;
-				}
-
-				if (x > BOARD_WIDTH || y > BOARD_HEIGHT)
-				{
-					//This block is off limits
 					return false;
 				}
 			}
@@ -71,4 +67,13 @@ bool Board::isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetro
 
 	//This movement is possible
 	return true;
+}
+
+void Board::clear()
+{
+	//Fill board with empty blocks
+	for (size_t line = 0; line < BOARD_HEIGHT; line++)
+	{
+		board[line].fill(false);
+	}
 }

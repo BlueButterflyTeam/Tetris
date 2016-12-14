@@ -26,8 +26,9 @@ public:
 	array<array<bool, BOARD_WIDTH>, BOARD_HEIGHT> board;			//Double array. Contains blocks. True = Block present.
 
 	void shiftLinesDown(unsigned int beginLine);
-	void storeTetromino(unsigned int pX, unsigned int pY, Tetromino tetromino);
-	bool isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetromino);
+	void storeTetromino(int pX, int pY, Tetromino tetromino);
+	bool isPossibleMovement(int pX, int pY, Tetromino tetromino);
+	void clear();
 };
 
 #endif
