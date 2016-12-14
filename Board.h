@@ -27,6 +27,7 @@ public:
 
 	void shiftLinesDown(unsigned int beginLine);
 	void storeTetromino(unsigned int pX, unsigned int pY, Tetromino tetromino);
+	bool isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetromino);
 };
 
 #endif

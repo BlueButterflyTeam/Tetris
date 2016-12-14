@@ -45,3 +45,31 @@ void Board::storeTetromino(unsigned int pX, unsigned int pY, Tetromino tetromino
 		}
 	}
 }
+
+bool Board::isPossibleMovement(unsigned int pX, unsigned int pY, Tetromino tetromino)
+{
+	// (pX,pY) is the coordinates of the upper-left corner of a tetromino
+	for (size_t x = 0; x < PIECE_BLOCKS; x++)
+	{
+		for (size_t y = 0; y < PIECE_BLOCKS; y++)
+		{
+			if (tetromino.matrix[x][y])
+			{
+				//There is a block in the tetromino at this coordinates
+				if (board[pX + x][pY + y])
+				{
+					//This block is not free
+					return false;
+				}
+
+				if (x > BOARD_WIDTH || y > BOARD_HEIGHT)
+				{
+					//This block is off limits
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
