@@ -11,17 +11,17 @@ public:
 	Game();
 	~Game();
 
-	unsigned int deletedLinesCount;
-	unsigned int level;
-	unsigned int score;
-	unsigned int timer;
-	unsigned int speed;
+	int deletedLinesCount;
+	int level;
+	int score;
+	int timer;
+	int speed;
 	bool gameRunning;
 
-	unsigned int currentTetrominoPosX;
-	unsigned int currentTetrominoPosY;
-	unsigned int nextTetrominoPosX;
-	unsigned int nextTetrominoPosY;
+	int currentTetrominoPosX;
+	int currentTetrominoPosY;
+	int nextTetrominoPosX;
+	int nextTetrominoPosY;
 
 
 	Board board;

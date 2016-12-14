@@ -27,6 +27,7 @@ void Game::init()
 	this->currentTetrominoPosY = 0;
 	this->nextTetrominoPosX = BOARD_WIDTH + 2;
 	this->nextTetrominoPosY = 0;
+	this->board.clear();
 }
 
 void Game::createNewPiece()
