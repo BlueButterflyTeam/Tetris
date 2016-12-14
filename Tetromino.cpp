@@ -52,7 +52,7 @@ void Tetromino::setColor(TetrominoType type)
 		break;
 	}
 
-	this->color - color;
+	this->color = color;
 }
 
 TetrominoType Tetromino::getType()
