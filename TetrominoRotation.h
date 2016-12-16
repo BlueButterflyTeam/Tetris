@@ -1,6 +1,7 @@
 #pragma once
-enum TetrominoRotation {NONE, ONCE, TWICE, THRICE, NB_ROTATIONS};
+#ifndef _TETROMINOROTATION_
+#define _TETROMINOROTATION_
 
-TetrominoRotation getRandomTetrominoRotation() {
-	return static_cast<TetrominoRotation>(rand() % NB_ROTATIONS);
-}
+enum TetrominoRotation {ROTATION_NONE, ONCE, TWICE, THRICE, NB_ROTATIONS};
+
+#endif

@@ -2,10 +2,12 @@
 
 #include <iostream>
 #include <string>
-#include <glut.h>
 #include <glew.h>
+#include <glut.h>
 
 #include "Game.h"
+
+#define SCREEN_HEIGHT 880
 
 //shader ID
 GLuint Program;
@@ -23,13 +25,12 @@ struct vertex
 
 std::string key;
 
-int screenHeight;
 int screenWidth;
 
 GLuint texture = 0;
 
 // Game
-Game mGame;
+Game game(SCREEN_HEIGHT);
 
 //print shader log
 void shaderLog(unsigned int shader)
@@ -227,19 +228,19 @@ void display()
 	//checkOpenGLError(); 
 
 
-	//mGame.drawScene();
+	game.drawScene();
 
 	// Write messages on right hand lower side of screen
 
 	glColor3f(0, 0, 0);
 	char msg[100];
-	if (!mGame.gameRunning)
+	if (!game.gameRunning)
 		BitmapText("Game Over", 500, 450);
-	sprintf_s(msg, "Lines: %d", mGame.deletedLinesCount);
+	sprintf_s(msg, "Lines: %d", game.deletedLinesCount);
 	BitmapText(msg, 500, 500);
-	sprintf_s(msg, "Level: %d", mGame.level);
+	sprintf_s(msg, "Level: %d", game.level);
 	BitmapText(msg, 500, 580);
-	sprintf_s(msg, "Score: %d", mGame.score);
+	sprintf_s(msg, "Score: %d", game.score);
 	BitmapText(msg, 500, 540);
 
 	glutSwapBuffers();
@@ -247,111 +248,139 @@ void display()
 }
 
 void keyPressed(unsigned char _key, int x, int y) {
-	//TODO
-	/*
 	switch (_key)
 	{
-	case('x'):
+	case(' '):
 	{
 		// Check collision from up to down
-		while (mBoard.isPossibleMovement(mGame.mPosX, mGame.mPosY, mGame.tetroType, mGame.mRotation)) { mGame.mPosY++; }
-
-		mBoard.storeTetromino(mGame.mPosX, mGame.mPosY - 1, mGame.tetroType, mGame.mRotation);
-
-		mBoard.deletePossibleLines();
-
-
-
-		if (mBoard.isGameOver())
+		while (game.board.isPossibleMovement(game.currentTetrominoPosY + 1, game.currentTetrominoPosX, game.currentTetromino))
 		{
-			mBoard.gameOver = true;
-			//exit(0);
+			//Shift Tetromino down
+			game.currentTetrominoPosY++;
 		}
 
-		mGame.createNewPiece();
+		game.storeTetromino();
 
 		break;
 	}
-	case('z'):
+	case('e'):
 	{
-		if (mBoard.isPossibleMovement(mGame.mPosX, mGame.mPosY, mGame.tetroType, (mGame.mRotation + 1) % 4))
-			mGame.mRotation = (mGame.mRotation + 1) % 4;
+		Tetromino possibleTetromino = game.currentTetromino;
+		possibleTetromino.rotateRight();
+
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY, game.currentTetrominoPosX, possibleTetromino))
+		{
+			//Rotate tetromino right
+			game.currentTetromino.rotateRight();
+		}
+
 		glutPostRedisplay();
 		break;
 	}
-	}*/
+	case('q'):
+	{
+		Tetromino possibleTetromino = game.currentTetromino;
+		possibleTetromino.rotateLeft();
 
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY, game.currentTetrominoPosX, possibleTetromino))
+		{
+			//Rotate tetromino left
+			game.currentTetromino.rotateLeft();
+		}
+
+		glutPostRedisplay();
+		break;
+	}
+	}
 }
 void specialKeyPressed(int _key, int x, int y) {
-	//TODO
-	/*switch (_key)
+	switch (_key)
 	{
-	case(100)://left key
+	case(GLUT_KEY_LEFT):
 	{
-		if (mBoard.isPossibleMovement(mGame.mPosX - 1, mGame.mPosY, mGame.tetroType, mGame.mRotation))
-			mGame.mPosX--;
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY, game.currentTetrominoPosX - 1, game.currentTetromino))
+		{
+			//Shift Tetromino to left
+			game.currentTetrominoPosX--;
+		}
+			
 		glutPostRedisplay();
 		break;
 	}
-	case(102)://right key
+	case(GLUT_KEY_RIGHT):
 	{
-		if (mBoard.isPossibleMovement(mGame.mPosX + 1, mGame.mPosY, mGame.tetroType, mGame.mRotation))
-			mGame.mPosX++;
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY, game.currentTetrominoPosX + 1, game.currentTetromino))
+		{
+			//Shift Tetromino to right
+			game.currentTetrominoPosX++;
+		}
+
 		glutPostRedisplay();
 		break;
 	}
-	case(103)://down key
+	case(GLUT_KEY_DOWN):
 	{
-		if (mBoard.isPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.tetroType, mGame.mRotation))
-			mGame.mPosY++;
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY + 1, game.currentTetrominoPosX, game.currentTetromino))
+		{
+			//Shift Tetromino down
+			game.currentTetrominoPosY++;
+		}
+
 		glutPostRedisplay();
 		break;
 	}
-	}*/
+	}
 
 }
 
 void update(int time1)
 {
-	//TODO
-	/*
-	if (!mGame.gameRunning)//if game is over restart game
+	if (!game.gameRunning)//if game is over restart game
 	{
 		if (time1 < 10)
 			glutTimerFunc(200, update, time1 + 1);
 		else {
-			mGame.gameRunning = true;
-			mGame.init();
-			glutTimerFunc(mGame.speed, update, 0);
+			game.gameRunning = true;
+			game.init();
+			glutTimerFunc(game.speed, update, 0);
 		}
 		glutPostRedisplay();
 	}
 	else
 	{
-		if (mBoard.isPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.tetroType, mGame.mRotation))
+		//Game Running
+		//Check if piece can go down
+		if (game.board.isPossibleMovement(game.currentTetrominoPosY + 1, game.currentTetrominoPosX, game.currentTetromino))
 		{
-			mGame.mPosY++;
+			//Shift Tetromino down
+			game.currentTetrominoPosY++;
 		}
 		else
 		{
-			mBoard.storeTetromino(mGame.mPosX, mGame.mPosY, mGame.tetroType, mGame.mRotation);
-			mBoard.deletePossibleLines();
-			if (mBoard.isGameOver())
+			//Piece cannot go down. Check if at the top line.
+			if (game.currentTetrominoPosY == 0)
 			{
-				mBoard.gameOver = true;
+				//If PosY = o then we cannot store the pice. Game is over.
+				game.gameRunning = false;
 			}
-			mGame.createNewPiece();
+			else
+			{
+				//We can store the piece.
+				game.storeTetromino();
+			}
 		}
-		if (mBoard.gameOver)
+
+
+		if (!game.gameRunning)
 		{
 			glutTimerFunc(10, update, 1);
 		}
-		else {
+		else 
+		{
 			glutPostRedisplay();
-			glutTimerFunc(mBoard.timer, update, 0);
+			glutTimerFunc(game.timer, update, 0);
 		}
-	}*/
-
+	}
 }
 
 
@@ -386,7 +415,7 @@ int main(int argc, char **argv) {
 	glutKeyboardFunc(keyPressed);
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
-	glutTimerFunc(mGame.speed, update, 0);
+	glutTimerFunc(game.speed, update, 0);
 	glutMainLoop();
 
 	//free resources

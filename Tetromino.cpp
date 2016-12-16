@@ -86,7 +86,7 @@ void Tetromino::setMatrix(TetrominoType type, TetrominoRotation rotation)
 void Tetromino::randomize()
 {
 	this->type = getRandomTetrominoType();
-	this->rotation = NONE;
+	this->rotation = ROTATION_NONE;
 	setColor(this->type);
 	setMatrix(this->type, this->rotation);
 }
@@ -122,7 +122,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getI(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,0,0,0 },
@@ -178,7 +178,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getL(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,1,0,0 },
@@ -234,7 +234,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getJ(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,1,0,0 },
@@ -290,7 +290,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getZ(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,0,1,0 },
@@ -346,7 +346,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getS(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,1,0,0 },
@@ -402,7 +402,7 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getT(TetrominoRotation
 
 	switch (rotation)
 	{
-	case NONE:
+	case ROTATION_NONE:
 		matrix = { {
 			{ 0,0,0,0,0 },
 			{ 0,0,1,0,0 },
@@ -450,4 +450,8 @@ array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> Tetromino::getT(TetrominoRotation
 	}
 
 	return matrix;
+}
+
+TetrominoType Tetromino::getRandomTetrominoType() {
+	return static_cast<TetrominoType>(rand() % NB_TYPES);
 }

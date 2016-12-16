@@ -37,6 +37,8 @@ private:
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getZ(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getS(TetrominoRotation rotation);
 	array<array<bool, PIECE_BLOCKS>, PIECE_BLOCKS> getT(TetrominoRotation rotation);
+
+	TetrominoType getRandomTetrominoType();
 };
 
 #endif
